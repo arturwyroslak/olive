@@ -211,6 +211,12 @@ list(APPEND OLIVE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/ext)
 add_subdirectory(app)
 
 if (BUILD_TESTS)
-enable_testing()
-add_subdirectory(tests)
+  enable_testing()
+  add_subdirectory(tests)
 endif()
+
+file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h)
+add_custom_target(
+  format
+  COMMAND clang-format -i ${ALL_SOURCE_FILES}
+)
